@@ -1,0 +1,14 @@
+---
+- name: Verify private key exists
+  stat:
+    path: "{{ homedir }}/.ssh/id_rsa"
+  register: priv_key_exists
+
+- name: Create .ssh directory if it doesn't exit
+  file:
+    path: "{{ homedir }}/.ssh"
+    state: directory
+
+- name: Generate SSH Keys
+  shell: "ssh-keygen -b 4096 -t rsa -q -f {{ homedir }}/.ssh/id_rsa -P \"\""
+  when: priv_key_exists.stat.exists == false
