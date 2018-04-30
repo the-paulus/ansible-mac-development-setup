@@ -1,0 +1,88 @@
+---
+- name: Workstation setup
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    php_version: "7.0"
+
+    brew_taps:
+    - name: composer
+      options: ""
+    - name: docker
+      options: ""
+    - name: docker-compose
+      options: ""
+    - name: docker-machine
+      options: ""
+    - name: node
+      options: ""
+    - name: "php@{{ php_version }}"
+      options: ""
+    - name: wget
+      options: ""
+
+    brew_casks:
+    - name: atom
+      options: "force"
+    - name: kitematic
+      options: "--force"
+    - name: sourcetree
+      options: "--force"
+    - name: vagrant
+      options: "--force"
+    - name: vagrant-manager
+      options: "--force"
+    - name: virtualbox
+      options: "--force"
+    - name: virtualbox-extension-pack
+      options: "--force"
+    - name: rambox
+      options: "force"
+
+  tasks:
+    - name: "Include SSH tasks"
+      include_tasks: "ssh.yml"
+
+    - name: "Include Homebrew tasks"
+      include_tasks: "homebrew.yml"
+
+    - name: "Include docker-machine tasks"
+      include_tasks: "docker-machine.yml"
+
+    - name: Install NPM Modules
+      npm:
+        name: "{{ item }}"
+        global: yes
+        state: present
+      with_items:
+        - bower
+        - grunt
+        - gulp
+        - selenium-webdriver
+        - chromedirver
+
+  post_tasks:
+    - name: "Update Local Configuration Files"
+      template:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        backup: yes
+        owner: "{{ username }}"
+        group: "{{ group }}"
+      with_items:
+        - src: files/bash_profile.j2
+          dest: "{{ homedir }}/.bash_profile"
+        - src: files/.ansible.cfg
+          dest: "{{ homedir }}/.ansible.cfg"
+
+    - name: "Link {{ homedir }}/.bashrc to {{ homedir }}/.bash_profile"
+      file:
+        path:  "{{ homedir }}/.bashrc"
+        state: link
+        src: "{{ homedir }}/.bash_profile"
+
+    - name: "Update Homebrew"
+      homebrew:
+        update_homebrew: yes
+        upgrade_all: yes
