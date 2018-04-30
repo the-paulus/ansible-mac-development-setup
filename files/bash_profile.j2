@@ -1,0 +1,58 @@
+export PHP_PATH="$(brew --prefix php@{{ php_version }})/bin"
+export PATH="/usr/local/sbin:~/.composer/vendor/bin:$PHP_PATH:$PATH"
+
+alias artisan="php artisan"
+alias mysql="mysql -h 127.0.0.1"
+
+eval $(docker-machine env default)
+
+function dash()
+{
+        if [ "$1" = "" ]
+        then
+                CONTAINER=$(docker ps --filter Status=running --format "{{ '{{' }}.Names {{'}}'}}");
+        else
+                CONTAINER=$1
+        fi
+
+        docker exec -it $CONTAINER /bin/bash
+}
+
+function conrestart()
+{
+        if [ "$1" = "" ]
+        then
+                CONTAINER=$(docker ps -n 1 --format "{{'{{'}}.Names{{'}}'}}");
+        else
+                CONTAINER=$1
+        fi
+
+        docker stop $CONTAINER && docker start $CONTAINER
+}
+
+function vms_destroy()
+{
+  if [ $# -lt 2 ]
+  then
+    print "Enter a VM name or 'all' to destroy all running VMs."
+    exit
+  fi
+
+  if [ "$1" = "all" ]
+  then
+    for vm in $(vagrant status | grep -v 'not created' | awk '{print $1}')
+    do
+      vagrant destroy -f $vm
+    done
+  else
+    vagrant destroy -f $1
+  fi
+}
+
+function vms_save_init()
+{
+  for vm in $(vagrant status | grep running | awk '{print $1}')
+  do
+    vagrant snapshot save $vm init
+  done
+}
