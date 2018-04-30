@@ -1,0 +1,7 @@
+---
+- name: "Remove Docker Machine"
+  shell: 'docker-machine rm -f default || true'
+
+- name: "Create Docker Machine"
+  shell: 'docker-machine create default --driver virtualbox --virtualbox-cpu-count "2" --virtualbox-disk-size "40000" --virtualbox-memory "2048"'
+
