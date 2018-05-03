@@ -1,35 +1,145 @@
 ---
-- name: Install Brews
-  homebrew:
-    install_options: "{{ item.options }}"
-    name: "{{ item.name }}"
-    update_homebrew: yes
-    upgrade_all: yes
-    state: "{{ operation }}"
-  with_items: "{{ brew_taps }}"
+- name: Homebrew Play Book
+  hosts: localhost
+  connection: local
+  vars:
+    php_version: "7.0"
 
-- name: "Link PHP version"
-  homebrew:
-    name: "php@{{ php_version }}"
-    state: linked
-  when: operation == "present"
+    brew_taps:
+    - name: composer
+      options: ""
+    - name: docker
+      options: ""
+    - name: docker-compose
+      options: ""
+    - name: docker-machine
+      options: ""
+    - name: mas
+      options: ""
+    - name: node
+      options: ""
+    - name: "php@{{ php_version }}"
+      options: ""
+    - name: wget
+      options: ""
 
-- name: "Unlink PHP version"
-  homebrew:
-    name: "php@{{ php_version }}"
-    state: unlinked
-  when: operation == "absent"
+    brew_casks:
+    - name: atom
+      options: "force"
+    - name: kitematic
+      options: "--force"
+    - name: sourcetree
+      options: "--force"
+    - name: vagrant
+      options: "--force"
+    - name: vagrant-manager
+      options: "--force"
+    - name: virtualbox
+      options: "--force"
+    - name: virtualbox-extension-pack
+      options: "--force"
+    - name: rambox
+      options: "force"
 
-- name: Install Casks
-  homebrew_cask:
-    name: "{{ item.name }}"
-    install_options: "{{ item.options }}"
-    state: "{{ operation }}"
-  with_items: "{{ brew_casks }}"
+    atom_packages:
+      - ansible-galaxy
+      - ansible-galaxy-plus
+      - ansible-snippets
+      - api-docs
+      - atom-ansible-snippets
+      - atom-autocomplete-php
+      - atom-jinja2
+      - atom-regextoolkit
+      - atom-typescript
+      - atom-vagrant-manager
+      - autocomplete-ansible
+      - autocomplete-atom-api
+      - autocomplete-css
+      - autocomplete-html
+      - autocomplete-js-import
+      - autocomplete-json
+      - autocomplete-modules
+      - autocomplete-php
+      - autocomplete-plus
+      - autocomplete-snippets
+      - autocomplete-xml
+      - autosave
+      - composer
+      - composer-atom-plugin
+      - docker
+      - dockerletion
+      - git-time-machine
+      - github
+      - jshint
+      - json-colorer
+      - json-schema
+      - language-ansible
+      - language-docker
+      - linter
+      - linter-dockers
+      - linter-ui-default
+      - linter-xmllint
+      - npm-install
+      - php-composer-completion
+      - php-debug
+      - pretty-json
+      - python-debugger
+      - regex-railroad-diagram
+      - spell-check
+      - vagrant
+      - xml-formatter
 
-- name: Get Homebrew Prefix
-  shell: brew --prefix
-  register: homebrew_home
+    atom_syntax_themes:
+      - atom-monokai
+      - dash-syntax
+      - flashy-syntax
+      - monokai-blackboard
+      - monokai-dark
+      - monokai-seti
+      - monokai-slate
+      - nil-syntax
+      - seti-syntax
+      - termal-syntax
+      - terminal-like-syntax
+      - terminal-syntax
 
-- set_fact:
-  homebrew_home: "{{ homebrew_home.stdout }}"
+    atom_ui_themes:
+      - atom-material-ui
+      - dash-ui
+      - hyper-ui
+      - nil-ui
+      - seti-classic
+      - seti-ui
+      - termal-ui
+      - terminate-ui
+
+
+
+  tasks:
+    - name: Install Brews
+      homebrew:
+        install_options: "{{ item.options }}"
+        name: "{{ item.name }}"
+        update_homebrew: yes
+        upgrade_all: yes
+      with_items: "{{ brew_taps }}"
+
+    - name: "Link PHP version"
+      homebrew:
+        name: "php@{{ php_version }}"
+        state: linked
+
+    - name: Install Casks
+      homebrew_cask:
+        name: "{{ item.name }}"
+        install_options: "{{ item.options }}"
+      with_items: "{{ brew_casks }}"
+
+    - name: "Install Atom packages"
+      shell: "apm install {{ atom_packages|join(' ') }}"
+
+    - name: "Install Atom UI themes"
+      shell: "apm install {{ atom_ui_themes|join(' ') }}"
+
+    - name: "Install Atom syntax themes"
+      shell: "apm install {{ atom_syntax_themes|join(' ') }}"
