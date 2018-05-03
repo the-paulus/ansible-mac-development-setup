@@ -64,19 +64,22 @@
       - autocomplete-snippets
       - autocomplete-xml
       - autosave
+      - busy-signal
       - composer
       - composer-atom-plugin
       - docker
       - dockerletion
       - git-time-machine
       - github
+      - intentions
       - jshint
       - json-colorer
       - json-schema
       - language-ansible
       - language-docker
+      - language-puppet
       - linter
-      - linter-dockers
+      - linter-docker
       - linter-ui-default
       - linter-xmllint
       - npm-install
@@ -136,10 +139,13 @@
       with_items: "{{ brew_casks }}"
 
     - name: "Install Atom packages"
-      shell: "apm install {{ atom_packages|join(' ') }}"
+      shell: "apm install {{ item }}"
+      with_items: "{{ atom_packages }}"
 
     - name: "Install Atom UI themes"
-      shell: "apm install {{ atom_ui_themes|join(' ') }}"
+      shell: "apm install {{ item }}"
+      with_items: "{{ atom_ui_themes }}"
 
     - name: "Install Atom syntax themes"
-      shell: "apm install {{ atom_syntax_themes|join(' ') }}"
+      shell: "apm install {{ item }}"
+      with_items: "{{ atom_syntax_themes }}"
