@@ -42,13 +42,13 @@
 
   tasks:
     - name: "Include SSH tasks"
-      include_tasks: "ssh.yml"
+      include_tasks: "play-books/ssh.yml"
 
     - name: "Include Homebrew tasks"
-      include_tasks: "homebrew.yml"
+      include_playbook: "play-books/homebrew.yml"
 
     - name: "Include docker-machine tasks"
-      include_tasks: "docker-machine.yml"
+      include_tasks: "play-books/docker-machine.yml"
 
     - name: Install NPM Modules
       npm:
