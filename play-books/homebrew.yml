@@ -48,6 +48,10 @@
       - api-docs
       - atom-ansible-snippets
       - atom-autocomplete-php
+      - atom-beautify
+      - atom-debug-ui
+      - atom-ide-diagnostics
+      - atom-ide-ui
       - atom-jinja2
       - atom-regextoolkit
       - atom-typescript
@@ -71,6 +75,7 @@
       - dockerletion
       - git-time-machine
       - github
+      - ide-php
       - intentions
       - jshint
       - json-colorer
@@ -78,13 +83,14 @@
       - language-ansible
       - language-docker
       - language-puppet
-      - linter
       - linter-docker
       - linter-ui-default
       - linter-xmllint
       - npm-install
       - php-composer-completion
       - php-debug
+      - php-debug-ui
+      - php-debux
       - pretty-json
       - python-debugger
       - regex-railroad-diagram
