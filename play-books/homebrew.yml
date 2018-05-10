@@ -20,6 +20,8 @@
       options: ""
     - name: "php@{{ php_version }}"
       options: ""
+    - name: "source-to-image"
+      options: ""
     - name: wget
       options: ""
 
