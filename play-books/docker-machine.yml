@@ -5,3 +5,16 @@
 - name: "Create Docker Machine"
   shell: 'docker-machine create default --driver virtualbox --virtualbox-cpu-count "2" --virtualbox-disk-size "40000" --virtualbox-memory "2048"'
 
+- name: "Stop VM"
+  shell: 'VBoxManage controlvm default poweroff'
+
+- name: "Add port forwarding"
+  shell: "VBoxManage modifyvm default --natpf1 \"{{ item }}\""
+  with_items:
+    - 'http,tcp,,80,,80'
+    - 'phpmyadmin,tcp,,8080,,8080'
+    - 'https,tcp,,443,,443'
+    - 'mysql,tcp,,3306,,3306'
+
+- name: "Start VM"
+  shell: 'VBoxManage startvm default'
