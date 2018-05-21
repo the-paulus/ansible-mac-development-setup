@@ -29,17 +29,17 @@
     - name: atom
       options: "force"
     - name: kitematic
-      options: "--force"
+      options: "force"
     - name: sourcetree
-      options: "--force"
+      options: "force"
     - name: vagrant
-      options: "--force"
+      options: "force"
     - name: vagrant-manager
-      options: "--force"
+      options: "force"
     - name: virtualbox
-      options: "--force"
+      options: "force"
     - name: virtualbox-extension-pack
-      options: "--force"
+      options: "force"
     - name: rambox
       options: "force"
 
