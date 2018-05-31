@@ -1,11 +1,11 @@
 ---
-- name: "Remove Docker Machine"
-  shell: 'docker-machine rm -f default || true'
-
 - name: "Create Docker Machine"
-  shell: 'docker-machine create default --driver virtualbox --virtualbox-cpu-count "2" --virtualbox-disk-size "40000" --virtualbox-memory "2048"'
+  shell: "docker-machine create default --driver {{ docker_machine_driver }} --{{ docker_machine_driver }}-cpu-count \"{{ docker_machine_cpus }}\" --{{ docker_machine_driver }}-disk-size \"{{ docker_machine_disk_size }}\" --{{ docker_machine_driver }}-memory \"{{ docker_machine_ram }}\""
 
-- name: "Stop VM"
+- name: "Stop VM (virtualbox)"
+  shell: 'VBoxManage controlvm default poweroff'
+
+- name: "Stop VM (virtualbox)"
   shell: 'VBoxManage controlvm default poweroff'
 
 - name: "Add port forwarding"
