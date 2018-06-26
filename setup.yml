@@ -1,54 +1,17 @@
 ---
+- name: "Import Homebrew play book"
+  import_playbook: "play-books/homebrew.yml"
+
 - name: Workstation setup
   hosts: localhost
   connection: local
   gather_facts: no
-  vars:
-    php_version: "7.0"
-
-    brew_taps:
-    - name: composer
-      options: ""
-    - name: docker
-      options: ""
-    - name: docker-compose
-      options: ""
-    - name: docker-machine
-      options: ""
-    - name: node
-      options: ""
-    - name: "php@{{ php_version }}"
-      options: ""
-    - name: wget
-      options: ""
-
-    brew_casks:
-    - name: atom
-      options: "force"
-    - name: kitematic
-      options: "--force"
-    - name: sourcetree
-      options: "--force"
-    - name: vagrant
-      options: "--force"
-    - name: vagrant-manager
-      options: "--force"
-    - name: virtualbox
-      options: "--force"
-    - name: virtualbox-extension-pack
-      options: "--force"
-    - name: rambox
-      options: "force"
-
   tasks:
+    - name: "Include vars"
+      include_vars: "vars/main.yml"
+      
     - name: "Include SSH tasks"
-      include_tasks: "play-books/ssh.yml"
-
-    - name: "Include Homebrew tasks"
-      include_playbook: "play-books/homebrew.yml"
-
-    - name: "Include docker-machine tasks"
-      include_tasks: "play-books/docker-machine.yml"
+      import_tasks: "play-books/ssh.yml"
 
     - name: Install NPM Modules
       npm:
