@@ -1,0 +1,121 @@
+---
+php_version: "7.0"
+
+brew_taps:
+- name: composer
+  options: ""
+- name: docker
+  options: ""
+- name: docker-compose
+  options: ""
+- name: mas
+  options: ""
+- name: node
+  options: ""
+- name: "php@{{ php_version }}"
+  options: ""
+- name: "source-to-image"
+  options: ""
+- name: wget
+  options: ""
+
+brew_casks:
+- name: atom
+  options: "force"
+- name: docker
+  options: "force"
+- name: firefox
+  options: "force"
+- name: google-chrome
+  options: "force"
+- name: kitematic
+  options: "force"
+- name: sourcetree
+  options: "force"
+- name: vagrant
+  options: "force"
+- name: vagrant-manager
+  options: "force"
+- name: rambox
+  options: "force"
+
+atom_packages:
+- ansible-galaxy
+- ansible-galaxy-plus
+- ansible-snippets
+- api-docs
+- atom-ansible-snippets
+- atom-autocomplete-php
+- atom-beautify
+- atom-debug-ui
+- atom-ide-diagnostics
+- atom-ide-ui
+- atom-jinja2
+- atom-regextoolkit
+- atom-typescript
+- atom-vagrant-manager
+- autocomplete-ansible
+- autocomplete-atom-api
+- autocomplete-css
+- autocomplete-html
+- autocomplete-js-import
+- autocomplete-json
+- autocomplete-modules
+- autocomplete-php
+- autocomplete-plus
+- autocomplete-snippets
+- autocomplete-xml
+- autosave
+- busy-signal
+- composer
+- composer-atom-plugin
+- docker
+- dockerletion
+- git-time-machine
+- github
+- ide-php
+- intentions
+- jshint
+- json-colorer
+- json-schema
+- language-ansible
+- language-docker
+- language-puppet
+- linter-docker
+- linter-ui-default
+- linter-xmllint
+- npm-install
+- php-composer-completion
+- php-debug
+- php-debug-ui
+- php-debug
+- pretty-json
+- python-debugger
+- regex-railroad-diagram
+- spell-check
+- vagrant
+- xml-formatter
+
+atom_syntax_themes:
+- atom-monokai
+- dash-syntax
+- flashy-syntax
+- monokai-blackboard
+- monokai-dark
+- monokai-seti
+- monokai-slate
+- nil-syntax
+- seti-syntax
+- termal-syntax
+- terminal-like-syntax
+- terminal-syntax
+
+atom_ui_themes:
+- atom-material-ui
+- dash-ui
+- hyper-ui
+- nil-ui
+- seti-classic
+- seti-ui
+- termal-ui
+- terminate-ui
