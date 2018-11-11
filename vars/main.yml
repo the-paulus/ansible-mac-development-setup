@@ -20,23 +20,59 @@ brew_taps:
   options: ""
 
 brew_casks:
+- name: adobe-creative-cloud
+  options: "force"
+- name: appcode
+  options: "force"
 - name: atom
+  options: "force"
+- name: clion
+  options: "force"
+- name: datagrip
   options: "force"
 - name: docker
   options: "force"
 - name: firefox
   options: "force"
+- name: goland
+  options: "force"
 - name: google-chrome
+  options: "force"
+- name: intellij-idea
+  options: "force"
+- name: keybase
   options: "force"
 - name: kitematic
   options: "force"
+- name: jetbrains-toolbox
+  options: "force"
+- name: microsoft-office
+  options: "force"
+- name: phpstorm
+  options: "force"
+- name: protonmain-bridge
+  options: "force"
+- name: protonvpn
+  options: "force"
+- name: pycharm
+  options: "force"
+- name: rider
+  options: "force"
+- name: rubymine
+  options: "force"
+- name: signal
+  options: "force"
 - name: sourcetree
+  options: "force"
+- name: thunderbird
   options: "force"
 - name: vagrant
   options: "force"
 - name: vagrant-manager
   options: "force"
 - name: rambox
+  options: "force"
+- name: webstorm
   options: "force"
 
 atom_packages:
